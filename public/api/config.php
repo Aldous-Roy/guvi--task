@@ -1,8 +1,41 @@
+/**
+ * Configuration file for database and cache connections.
+ *
+ * - Defines constants for MySQL, MongoDB, and Redis connection settings.
+ * - Provides helper functions to connect to MySQL (`get_db()`), MongoDB (`get_mongo()`), and Redis (`get_redis()`).
+ * - Includes a helper function (`json_in()`) to parse JSON input from HTTP requests.
+ * - Sets HTTP headers for JSON content type and CORS.
+ *
+ * MySQL:
+ *   - DB_HOST: Hostname for MySQL server.
+ *   - DB_USER: Username for MySQL.
+ *   - DB_PASS: Password for MySQL.
+ *   - DB_NAME: Database name.
+ *
+ * MongoDB:
+ *   - Uses Composer autoload for MongoDB client.
+ *   - `get_mongo()` returns a MongoDB database instance.
+ *
+ * Redis:
+ *   - REDIS_HOST: Hostname for Redis server.
+ *   - REDIS_PORT: Port for Redis server.
+ *   - SESSION_TTL: Session time-to-live in seconds.
+ *
+ * Functions:
+ *   - get_db(): Returns a MySQLi connection or outputs error as JSON.
+ *   - get_mongo(): Returns a MongoDB database instance.
+ *   - get_redis(): Returns a Redis connection or outputs error as JSON.
+ *   - json_in(): Decodes JSON input from HTTP request body.
+ *
+ * HTTP Headers:
+ *   - Sets Content-Type to application/json.
+ *   - Allows CORS from any origin and specific headers.
+ */
 <?php
 // DB settings
 define('DB_HOST', '127.0.0.1');
 define('DB_USER', 'root');
-define('DB_PASS', 'Preetha@ks1');
+define('DB_PASS', 'Preetha@ks1'); //replace with your MySQL root password
 define('DB_NAME', 'internship_db');
 
 // MongoDB settings
@@ -43,7 +76,7 @@ function json_in() {
     return json_decode(file_get_contents('php://input'), true) ?? [];
 }
 
-// Headers
+// Headers with CORS
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');

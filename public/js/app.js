@@ -1,4 +1,4 @@
-const API_ROOT = '/api'; // <-- change if your API is mounted elsewhere
+const API_ROOT = '/api'; 
 
 function apiPost(path, data, token) {
   return $.ajax({
@@ -91,6 +91,17 @@ function loadProfile(renderFn) {
 }
 
 // Submit profile update (binds to update form)
+/**
+ * Attaches a submit handler to a form for updating user profile information via AJAX.
+ *
+ * @param {string} formSelector - jQuery selector for the form to attach the submit handler to.
+ * @param {function(Object):void} [onSuccess] - Optional callback to execute if the profile update is successful. Receives the response object as an argument.
+ *
+ * @example
+ * submitProfileUpdate('#profileForm', function(response) {
+ *   alert('Profile updated!');
+ * });
+ */
 function submitProfileUpdate(formSelector, onSuccess) {
   $(formSelector).on('submit', function(e) {
     e.preventDefault();

@@ -1,3 +1,21 @@
+/**
+ * Retrieves the authenticated user's profile information.
+ *
+ * This script performs the following steps:
+ * 1. Checks for a Bearer token in the Authorization header.
+ * 2. Validates the token using Redis to obtain the associated user ID.
+ * 3. Fetches the user's profile from MongoDB using the user ID.
+ * 4. Returns the profile data as a JSON response, including user ID, full name, age, date of birth (formatted as 'Y-m-d'), and contact information.
+ *
+ * Responses:
+ * - 401 Unauthorized if the token is missing or invalid.
+ * - JSON object with 'success' and 'profile' fields.
+ *
+ * Dependencies:
+ * - Requires 'config.php' for Redis and MongoDB connection helpers.
+ * - Assumes Redis stores session tokens as "session:{token}" => user_id.
+ * - Assumes MongoDB 'profiles' collection stores user profiles with 'user_id' as integer.
+ */
 <?php
 require_once 'config.php';
 
@@ -28,7 +46,7 @@ if (!$profile) {
     exit;
 }
 
-// Convert MongoDB\BSON\UTCDateTime to readable date string for dob
+// Convert MongoDB data of time to readable date string for dob
 $dob = isset($profile['dob']) ? $profile['dob']->toDateTime()->format('Y-m-d') : null;
 
 echo json_encode([

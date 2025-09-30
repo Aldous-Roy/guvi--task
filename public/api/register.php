@@ -1,3 +1,19 @@
+/**
+ * Handles user registration via API.
+ *
+ * Expects a JSON payload with 'email', 'password', and optional 'full_name'.
+ * Validates the email format and ensures the password is at least 6 characters long.
+ * Hashes the password and inserts a new user record into the 'users' table.
+ * Returns a JSON response indicating success or failure.
+ *
+ * Response Codes:
+ * - 200: Registration successful.
+ * - 400: Invalid email or password.
+ * - 409: Email already registered.
+ *
+ * Dependencies:
+ * - Requires 'config.php' for database connection and helper functions.
+ */
 <?php
 require_once 'config.php';
 
